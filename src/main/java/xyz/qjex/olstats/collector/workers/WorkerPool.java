@@ -14,7 +14,6 @@ import java.util.concurrent.*;
 /**
  * Created by qjex on 8/9/16.
  */
-@Service
 public class WorkerPool {
 
     @Autowired

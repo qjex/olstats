@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Created by qjex on 8/9/16.
  */
-@Service
 @PropertySource("file:./config.properties")
 public class Collector {
 

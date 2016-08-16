@@ -2,8 +2,6 @@ package xyz.qjex.olstats.collector.workers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import xyz.qjex.olstats.entity.Submission;
 import xyz.qjex.olstats.entity.User;
 import xyz.qjex.olstats.plaforms.Platform;
@@ -40,7 +38,7 @@ public class Worker implements Runnable {
             if (submissions == null) continue;
 
             for (Submission submission : submissions) {
-                if (repository.countByTaskNameAndPlatformNameAllIgnoreCase(submission.getTaskName(), submission.getPlatformName()) > 0) continue;
+                if (repository.countByTaskNameAndPlatformNameAndUserId(submission.getTaskName(), submission.getPlatformName(), user.getUserId()) > 0) continue;
                 count++;
                 repository.save(submission);
             }

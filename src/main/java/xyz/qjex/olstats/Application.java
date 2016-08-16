@@ -9,15 +9,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import xyz.qjex.olstats.utils.config.AppConfig;
 
 @EnableScheduling
 @Configuration
 @EnableAutoConfiguration
-@Import(AppConfig.class)
+@ComponentScan
 public class Application {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(Application.class, args);
 	}
+
 }

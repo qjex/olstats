@@ -17,8 +17,8 @@ import xyz.qjex.olstats.Application;
 /**
  * Created by qjex on 8/11/16.
  */
-@Configuration
 @EnableMongoRepositories(basePackageClasses = Application.class)
+@Configuration
 @PropertySource("file:./config.properties")
 public class MongoConfig extends AbstractMongoConfiguration {
 

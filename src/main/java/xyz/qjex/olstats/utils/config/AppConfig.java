@@ -21,7 +21,6 @@ import xyz.qjex.olstats.plaforms.PlatformsBuilder;
 
 @Configuration
 @PropertySource("file:./config.properties")
-@Import(MongoConfig.class)
 public class AppConfig {
 
     @Autowired
