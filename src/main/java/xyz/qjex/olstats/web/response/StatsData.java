@@ -2,6 +2,8 @@ package xyz.qjex.olstats.web.response;
 
 import xyz.qjex.olstats.entity.User;
 
+import java.util.Map;
+
 
 /**
  * Created by qjex on 8/16/16.
@@ -10,16 +12,24 @@ public class StatsData {
 
     private String userId;
     private String name;
-    private long count;
+    private Map<String, Long> count;
+    private long totalCount;
 
-    public StatsData(User user, long cnt) {
+    public StatsData(User user, Map<String, Long> count) {
         userId = user.getUserId();
         name = user.getName();
-        count = cnt;
+        for (Map.Entry<String, Long> ent : count.entrySet()) {
+            totalCount += ent.getValue();
+        }
+        this.count = count;
     }
 
-    public long getCount() {
+    public Map<String, Long> getCount() {
         return count;
+    }
+
+    public long getTotalCount() {
+        return totalCount;
     }
 
     public String getName() {

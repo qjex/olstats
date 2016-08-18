@@ -9,7 +9,9 @@ import xyz.qjex.olstats.plaforms.Platform;
 import xyz.qjex.olstats.repos.SubmissionRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by qjex on 8/16/16.
@@ -34,8 +36,26 @@ public class SubmissionService {
         return result;
     }
 
+    public Map<String, Long> countSubmissionsByPlatform(User user, List<Platform> platforms, long startTime, long endTime) {
+        Map<String, Long> result = new HashMap<>();
+        for (Platform platform : platforms) {
+            String name = platform.getName();
+            result.put(name, submissionRepository.countSubmissions(user.getUserId(), name, startTime, endTime));
+        }
+        return result;
+    }
+
     public long countCustomSubmissions(User user, List<Platform> platforms, long startTime, long endTime) {
         return getCustomSubmissions(user, platforms, startTime, endTime).size();
+    }
+
+    public Map<String, Long> countCustomSubmissionsByPlatform(User user, List<Platform> platforms, long startTime, long endTime) {
+        Map<String, Long> result = new HashMap<>();
+        for (Platform platform : platforms) {
+            String name = platform.getName();
+            result.put(name, (long)getCustomSubmissions(user, platforms, startTime, endTime).size());
+        }
+        return result;
     }
 
     public List<Submission> getCustomSubmissions(User user, List<Platform> platforms, long startTime, long endTime) {

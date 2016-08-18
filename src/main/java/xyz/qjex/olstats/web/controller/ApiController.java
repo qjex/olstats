@@ -60,8 +60,8 @@ public class ApiController {
         long endTime = request.getEndTime();
 
         for (User user : request.getCustomUsers()) {
-            long cnt = submissionService.countCustomSubmissions(user, allPlatforms, startTime, endTime);
-            response.add(new StatsData(user, cnt));
+            Map<String, Long> cur = submissionService.countCustomSubmissionsByPlatform(user, allPlatforms, startTime, endTime);
+            response.add(new StatsData(user, cur));
         }
 
         ids.clear();
@@ -72,13 +72,39 @@ public class ApiController {
             for (User user : users) {
                 String userId = user.getUserId();
                 if (ids.contains(userId)) continue;
-                long cnt = submissionService.countSubmissions(user, allPlatforms, startTime, endTime);
-                response.add(new StatsData(user, cnt));
+                Map<String, Long> cur = submissionService.countSubmissionsByPlatform(user, allPlatforms, startTime, endTime);
+                response.add(new StatsData(user, cur));
                 ids.add(userId);
             }
         }
         return new DefaultResponse(response);
     }
+
+    @RequestMapping(value = "/get_platforms", method = RequestMethod.GET, produces = "application/json")
+    public DefaultResponse getPlatforms() {
+        List<Map<String, String> > result = new ArrayList<>();
+
+        for (Platform platform : platforms.getAll()) {
+            Map<String, String> cur = new HashMap<>();
+            cur.put("name", platform.getName());
+            cur.put("siteName", platform.getSiteName());
+            cur.put("siteAddress", platform.getSiteAddress());
+            cur.put("idDescriptor", platform.getIdDescriptor());
+
+            result.add(cur);
+        }
+
+        return new DefaultResponse(result);
+    }
+
+    @RequestMapping(value = "/get_lists", method = RequestMethod.GET, produces = "application/json")
+    public DefaultResponse getLists() {
+        List<UserList> result = userListRepository.findAll();
+        return new DefaultResponse(result);
+    }
+
+
+
 
 
 
