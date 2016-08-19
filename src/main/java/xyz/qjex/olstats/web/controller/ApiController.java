@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import xyz.qjex.olstats.entity.CustomUser;
 import xyz.qjex.olstats.entity.User;
 import xyz.qjex.olstats.entity.UserList;
 import xyz.qjex.olstats.plaforms.Platform;
@@ -59,8 +60,8 @@ public class ApiController {
         long startTime = request.getStartTime();
         long endTime = request.getEndTime();
 
-        for (User user : request.getCustomUsers()) {
-            Map<String, Long> cur = submissionService.countCustomSubmissionsByPlatform(user, allPlatforms, startTime, endTime);
+        for (CustomUser user : request.getCustomUsers()) {
+            Map<String, Long> cur = submissionService.countCustomSubmissionsByPlatform(user.getUser(), allPlatforms, startTime, endTime);
             response.add(new StatsData(user, cur));
         }
 
