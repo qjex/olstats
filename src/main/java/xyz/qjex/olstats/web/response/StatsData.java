@@ -11,13 +11,11 @@ import java.util.Map;
  */
 public class StatsData {
 
-    private String userId;
     private String name;
     private Map<String, Long> count;
     private long totalCount;
 
     public StatsData(User user, Map<String, Long> count) {
-        userId = user.getUserId();
         name = user.getName();
         for (Map.Entry<String, Long> ent : count.entrySet()) {
             totalCount += ent.getValue();
@@ -26,7 +24,6 @@ public class StatsData {
     }
 
     public StatsData(CustomUser user, Map<String, Long> count) {
-        userId = user.getUser().getUserId();
         name = user.getName();
         for (Map.Entry<String, Long> ent : count.entrySet()) {
             totalCount += ent.getValue();
@@ -44,9 +41,5 @@ public class StatsData {
 
     public String getName() {
         return name;
-    }
-
-    public String getUserId() {
-        return userId;
     }
 }

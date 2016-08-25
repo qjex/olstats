@@ -13,7 +13,6 @@ import xyz.qjex.olstats.plaforms.Platform;
 import xyz.qjex.olstats.plaforms.Platforms;
 import xyz.qjex.olstats.repos.UserListRepository;
 import xyz.qjex.olstats.service.SubmissionService;
-import xyz.qjex.olstats.service.UserService;
 import xyz.qjex.olstats.web.request.StatsRequest;
 import xyz.qjex.olstats.web.response.DefaultResponse;
 import xyz.qjex.olstats.web.response.StatsData;
@@ -33,15 +32,13 @@ public class ApiController {
     private final Platforms platforms;
     private final UserListRepository userListRepository;
     private final SubmissionService submissionService;
-    private final UserService userService;
 
     @Autowired
     public ApiController(SubmissionService submissionService, Platforms platforms,
-                         UserListRepository userListRepository, UserService userService) {
+                         UserListRepository userListRepository) {
         this.submissionService = submissionService;
         this.platforms = platforms;
         this.userListRepository = userListRepository;
-        this.userService = userService;
     }
 
     @RequestMapping(value = "/get_stats", method = RequestMethod.POST, produces = "application/json")
@@ -69,13 +66,11 @@ public class ApiController {
         for (String id : request.getUserLists()) {
             UserList userList = userListRepository.findById(id);
             if (userList == null) continue;
-            List<User> users = userService.findByUserList(userList);
-            for (User user : users) {
-                String userId = user.getUserId();
-                if (ids.contains(userId)) continue;
+            if (ids.contains(userList.getId())) continue;
+            ids.add(userList.getId());
+            for (User user : userList.getUsers()) {
                 Map<String, Long> cur = submissionService.countSubmissionsByPlatform(user, allPlatforms, startTime, endTime);
                 response.add(new StatsData(user, cur));
-                ids.add(userId);
             }
         }
         return new DefaultResponse(response);
@@ -100,7 +95,13 @@ public class ApiController {
 
     @RequestMapping(value = "/get_lists", method = RequestMethod.GET, produces = "application/json")
     public DefaultResponse getLists() {
-        List<UserList> result = userListRepository.findAll();
+        List<Map<String, String> > result = new ArrayList<>();
+        for (UserList userList : userListRepository.findAll()) {
+            Map<String, String> cur = new HashMap<>();
+            cur.put("id", userList.getId());
+            cur.put("name", userList.getName());
+            result.add(cur);
+        }
         return new DefaultResponse(result);
     }
 

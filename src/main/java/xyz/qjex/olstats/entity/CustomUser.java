@@ -20,7 +20,7 @@ public class CustomUser {
     }
 
     public User getUser() {
-        return new User(null, name, ids, 0L);
+        return new User(name, ids);
     }
 }
 

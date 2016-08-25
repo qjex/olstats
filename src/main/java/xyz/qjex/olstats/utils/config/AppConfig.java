@@ -10,10 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import xyz.qjex.olstats.Application;
 import xyz.qjex.olstats.collector.Collector;
 import xyz.qjex.olstats.collector.workers.WorkerPool;
-import xyz.qjex.olstats.plaforms.Acmp;
-import xyz.qjex.olstats.plaforms.Codeforces;
-import xyz.qjex.olstats.plaforms.Platforms;
-import xyz.qjex.olstats.plaforms.PlatformsBuilder;
+import xyz.qjex.olstats.plaforms.*;
 
 /**
  * Created by qjex on 8/11/16.
@@ -46,6 +43,7 @@ public class AppConfig {
         PlatformsBuilder pb = new PlatformsBuilder();
         pb.addPlatform(new Acmp());
         pb.addPlatform(new Codeforces());
+        pb.addPlatform(new Informatics());
         return pb.build();
     }
 

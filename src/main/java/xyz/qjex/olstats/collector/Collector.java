@@ -7,7 +7,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import xyz.qjex.olstats.collector.workers.WorkerPool;
 import xyz.qjex.olstats.entity.User;
-import xyz.qjex.olstats.repos.UserRepository;
+import xyz.qjex.olstats.entity.UserList;
+import xyz.qjex.olstats.repos.UserListRepository;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Collector {
     private Logger logger;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserListRepository repository;
 
     private WorkerPool workerPool;
 
@@ -31,10 +32,12 @@ public class Collector {
 
     @Scheduled(fixedDelayString = "${update_rate:600}000")
     private void collect() {
-        List<User> userList = userRepository.findAll();
-        for (User user : userList) {
-            logger.info("Updating user " + user.getUserId() + " (" + user.getName() + ")");
-            workerPool.process(user);
+        List<UserList> userLists = repository.findAll();
+        for (UserList userList : userLists) {
+            for (User user : userList.getUsers()) {
+                logger.info("Updating user " + user.getName());
+                workerPool.process(user);
+            }
         }
 
 

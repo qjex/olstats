@@ -36,14 +36,14 @@ public class Worker implements Runnable {
         for (Platform platform : platforms.getAll()) {
             List<Submission> submissions = platform.getAllSubmissions(user);
             if (submissions == null) continue;
-
+            String handle = user.getId(platform.getIdDescriptor());
             for (Submission submission : submissions) {
-                if (repository.countByTaskNameAndPlatformNameAndUserId(submission.getTaskName(), submission.getPlatformName(), user.getUserId()) > 0) continue;
+                if (repository.countByTaskNameAndPlatformNameAndUserId(submission.getTaskName(), platform.getName(), handle) > 0) continue;
                 count++;
                 repository.save(submission);
             }
         }
-        logger.info("Added " + count + " submissions to " + user.getUserId() + " (" + user.getName() + ")");
+        logger.info("Added " + count + " submissions to " + user.getName());
 
 
     }

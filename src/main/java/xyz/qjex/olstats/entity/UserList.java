@@ -14,14 +14,19 @@ public class UserList {
     @Id
     private String id;
     private String name;
-    private List<String> userId;
+    private List<User> users;
 
     public UserList() {
-        userId = new ArrayList<>();
+        users = new ArrayList<>();
     }
 
-    public List<String> getUserId() {
-        return userId;
+    public UserList(String name) {
+        this.name = name;
+        users = new ArrayList<>();
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 
     public String getId() {
@@ -29,10 +34,22 @@ public class UserList {
     }
 
     public void addUser(User user) {
-        userId.add(user.getUserId());
+        users.add(user);
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
