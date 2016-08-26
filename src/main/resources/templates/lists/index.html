@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Olstats</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">QjeX olstats</a>
+                <ul class="nav navbar-nav">
+                    <li><a href="/lists">Lists</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="btn btn-primary btn-xs" th:href="@{lists/add}">Add list</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tr th:each="list : ${lists}">
+                    <td th:text="${list.name}">Name</td>
+                    <td>
+                        <form th:action="@{lists/{id}/delete(id=${list.id})}" method="POST">
+                            <a class="btn btn-primary" th:href="@{lists/{id}/update(id=${list.id})}">Update</a>
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                        </form>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

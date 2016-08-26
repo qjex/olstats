@@ -1,4 +1,4 @@
-var apiUrl = "http://127.0.0.1:8081/api"
+var apiUrl = "http://a.qjex.xyz:8081/api"
 
 var nameByPlatform = {};
 var idsByAttr = {};

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Olstats</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">QjeX olstats</a>
+                <ul class="nav navbar-nav">
+                    <li><a href="/lists">Lists</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <div class="col-md-4">
+                    <form action="#" th:action="@{{link}(link=${postLink})}" th:object="${user}" method="POST">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input class="form-control" type="text" th:field="*{name}" />
+                        </div>
+                        <br>
+                        <div class="form-group" th:each="entry : *{ids}">
+                            <label th:text="${entry.key}"> </label>
+                            <input class="form-control" type="text" th:field="*{ids[__${entry.key}__]}" />
+                        </div>
+                        <p>
+                            <input class="btn btn-primary" type="submit" value="Изменить" />
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

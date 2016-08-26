@@ -1,4 +1,4 @@
-package xyz.qjex.olstats.utils.config;
+package xyz.qjex.olstats.config;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;

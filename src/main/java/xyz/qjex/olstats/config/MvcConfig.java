@@ -1,4 +1,4 @@
-package xyz.qjex.olstats.utils.config;
+package xyz.qjex.olstats.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
