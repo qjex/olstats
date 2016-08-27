@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Olstats</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">QjeX olstats</a>
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/lists}">Списки</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="alert alert-warning" role="alert" th:if="${param.error}">
+            Неверное имя пользователя или пароль
+        </div>
+        <div class="col-md-4">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="inputUsername">Имя пользователя</label>
+                    <input type="text" name="username" class="form-control" id="inputUsername" />
+                </div>
+                <div class="form-group">
+                    <label for="inputPass">Пароль</label>
+                    <input type="password" name="password" class="form-control" id="inputPass" />
+                </div>
+                <input type="submit" class="btn btn-default" value="Войти" />
+            </form>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

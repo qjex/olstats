@@ -15,11 +15,14 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">QjeX olstats</a>
+                <a class="navbar-brand" th:href="@{/}">QjeX olstats</a>
                 <ul class="nav navbar-nav">
-                    <li><a href="/lists">Lists</a></li>
+                    <li><a th:href="@{/lists}">Списки</a></li>
                 </ul>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/login?logout}">Выйти</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -34,7 +37,7 @@
                             <label for="name">Имя</label>
                             <input class="form-control" type="text" th:field="*{name}" />
                         </div>
-                        <br>
+                        <br />
                         <div class="form-group" th:each="entry : *{ids}">
                             <label th:text="${entry.key}"> </label>
                             <input class="form-control" type="text" th:field="*{ids[__${entry.key}__]}" />

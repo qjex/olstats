@@ -116,8 +116,8 @@ function buildRequest() {
         dateFrom = Math.floor(l / 1000)
     }
     if (r != null) {
-        r += 86399999;
         dateTo = Math.floor(r / 1000)
+        dateTo += 86399
     }
 
     var selectedLists = [];
