@@ -43,6 +43,7 @@ public class AppConfig {
         PlatformsBuilder pb = new PlatformsBuilder();
         pb.addPlatform(new Acmp());
         pb.addPlatform(new Codeforces());
+        pb.addPlatform(new EOlymp());
         pb.addPlatform(new Informatics());
         return pb.build();
     }
