@@ -22,6 +22,7 @@ public class UserListService {
 //        if (userList.getId() == null) {
 //            workerPool.
 //        }
+        workerPool.process(userList);
         repository.save(userList);
     }
 

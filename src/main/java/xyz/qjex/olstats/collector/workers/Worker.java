@@ -36,6 +36,7 @@ public class Worker implements Runnable {
         for (Platform platform : platforms.getAll()) {
             List<Submission> submissions = platform.getAllSubmissions(user);
             if (submissions == null) continue;
+            logger.error("Can't add " + platform.getName() + " submissions to " + user.getName());
             String handle = user.getId(platform.getIdDescriptor());
             for (Submission submission : submissions) {
                 if (repository.countByTaskNameAndPlatformNameAndUserId(submission.getTaskName(), platform.getName(), handle) > 0) continue;

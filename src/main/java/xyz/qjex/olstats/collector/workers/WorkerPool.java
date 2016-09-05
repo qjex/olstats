@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import xyz.qjex.olstats.entity.User;
+import xyz.qjex.olstats.entity.UserList;
 import xyz.qjex.olstats.plaforms.Platforms;
 import xyz.qjex.olstats.repos.SubmissionRepository;
 
@@ -56,4 +57,7 @@ public class WorkerPool {
         }
     }
 
+    public void process(UserList userList) {
+        for (User user : userList.getUsers()) process(user);
+    }
 }
