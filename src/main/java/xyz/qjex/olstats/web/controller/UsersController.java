@@ -49,7 +49,7 @@ public class UsersController {
         userList.getUsers().remove(pos);
         service.update(userList);
         model.addAttribute("users", userList.getUsers());
-        return "lists/usersList";
+        return "redirect:/lists/" + id + "/update";
     }
 
     @RequestMapping(value = "/lists/{id}/user/{pos}/update", method = RequestMethod.POST)
